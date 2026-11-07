@@ -14,15 +14,14 @@
 }
 
 body {
-    background: #050307;
-    color: #fff0f3;
-    font-family: Georgia, "Songti SC", serif;
     overflow-x: hidden;
+    font-family: Georgia, "Songti SC", serif;
+    background: #000;
 }
 
-/* =========================
-   第一页：粒子爱心
-========================= */
+/* =================================
+   PAGE 1: HEART
+================================= */
 
 #intro {
     position: fixed;
@@ -30,44 +29,51 @@ body {
     z-index: 10;
     background: #000;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     transition: opacity 1.5s ease;
 }
 
 #heartCanvas {
-    width: min(95vw, 900px);
+    width: min(100vw, 1500px);
+    height: auto;
     aspect-ratio: 3 / 2;
     display: block;
 }
 
 .intro-text {
     position: absolute;
-    bottom: 12%;
+    bottom: 10%;
     text-align: center;
     cursor: pointer;
     animation: breathe 2s infinite ease-in-out;
 }
 
 .intro-text h1 {
-    font-size: clamp(20px, 4vw, 30px);
+    font-size: clamp(20px, 4vw, 32px);
     font-weight: normal;
+    letter-spacing: 6px;
     color: #ff99cc;
-    letter-spacing: 5px;
     text-shadow: 0 0 20px #ff66aa;
 }
 
 .intro-text p {
-    margin-top: 14px;
+    margin-top: 15px;
+    color: #cccccc;
     font-size: 13px;
-    color: #d99ab8;
     letter-spacing: 3px;
 }
 
 @keyframes breathe {
-    0%, 100% { opacity: 0.55; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.06); }
+    0%, 100% {
+        opacity: .55;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
 }
 
 #intro.hide {
@@ -75,25 +81,142 @@ body {
     pointer-events: none;
 }
 
-/* =========================
-   第二页：告白信
-========================= */
+/* =================================
+   PAGE 2: LETTER
+================================= */
 
 #letter {
     display: none;
     min-height: 100vh;
-    background:
-        radial-gradient(ellipse at top, #67213d 0%, transparent 55%),
-        linear-gradient(135deg, #210b19, #54152f, #8e304f);
+    background: #ffffff;
+    color: #222222;
     position: relative;
     overflow: hidden;
-    animation: appear 2s ease forwards;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 760px;
+    margin: auto;
+    padding: 90px 0 70px;
+    text-align: center;
+    animation: appear 1.5s ease;
 }
 
 @keyframes appear {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+.small-title {
+    color: #777777;
+    font-size: 13px;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: clamp(32px, 7vw, 54px);
+    font-weight: normal;
+    line-height: 1.5;
+    color: #171717;
+    margin-bottom: 18px;
+}
+
+.subtitle {
+    color: #888888;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 55px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 22px;
+    padding: 40px 35px;
+    text-align: left;
+    box-shadow: 0 12px 40px rgba(0,0,0,.06);
+}
+
+.card p {
+    font-size: 16px;
+    line-height: 2.3;
+    margin-bottom: 23px;
+    color: #333333;
+}
+
+.card p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight {
+    color: #e65b96;
+}
+
+.divider {
+    width: 50px;
+    height: 1px;
+    background: #dddddd;
+    margin: 40px auto;
+}
+
+.promise {
+    text-align: center;
+    line-height: 2.2;
+    font-size: 20px;
+    color: #333333;
+}
+
+.signature {
+    margin-top: 55px;
+    text-align: center;
+    color: #555555;
+    line-height: 2;
+}
+
+.signature .love {
+    font-size: 35px;
+    color: #e65b96;
+    margin-bottom: 12px;
+}
+
+button {
+    margin-top: 40px;
+    padding: 14px 35px;
+    border: 1px solid #222222;
+    border-radius: 30px;
+    background: #222222;
+    color: #ffffff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    background: #ffffff;
+    color: #222222;
+}
+
+.hidden-message {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+    color: #333333;
+    font-size: 19px;
+    line-height: 2;
+}
+
+footer {
+    margin-top: 65px;
+    color: #999999;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+/* Floating hearts */
 
 .hearts {
     position: fixed;
@@ -106,7 +229,7 @@ body {
 .heart {
     position: absolute;
     bottom: -30px;
-    color: rgba(255, 190, 210, 0.5);
+    color: rgba(230, 91, 150, .3);
     animation: float 10s linear infinite;
 }
 
@@ -115,141 +238,34 @@ body {
         transform: translateY(0) rotate(0deg);
         opacity: 0;
     }
-    15% { opacity: 0.8; }
+    15% { opacity: .8; }
     100% {
         transform: translateY(-110vh) rotate(360deg);
         opacity: 0;
     }
 }
 
-.container {
-    position: relative;
-    z-index: 1;
-    width: 90%;
-    max-width: 760px;
-    margin: auto;
-    padding: 90px 0 70px;
-    text-align: center;
-}
-
-.small-title {
-    letter-spacing: 5px;
-    color: #f3b9cb;
-    font-size: 13px;
-    margin-bottom: 25px;
-}
-
-h2 {
-    font-size: clamp(32px, 7vw, 54px);
-    font-weight: normal;
-    line-height: 1.5;
-    margin-bottom: 18px;
-}
-
-.subtitle {
-    color: #e9b9c9;
-    font-size: 15px;
-    letter-spacing: 2px;
-    margin-bottom: 55px;
-}
-
-.card {
-    background: rgba(255,255,255,0.075);
-    border: 1px solid rgba(255,220,230,0.2);
-    border-radius: 22px;
-    padding: 40px 35px;
-    text-align: left;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 15px 60px rgba(0,0,0,0.2);
-}
-
-.card p {
-    font-size: 16px;
-    line-height: 2.3;
-    margin-bottom: 23px;
-    color: #ffe8ee;
-}
-
-.card p:last-child {
-    margin-bottom: 0;
-}
-
-.highlight {
-    color: #ffb4ca;
-}
-
-.divider {
-    width: 50px;
-    height: 1px;
-    background: #eaa2b8;
-    margin: 40px auto;
-}
-
-.promise {
-    text-align: center;
-    line-height: 2.2;
-    font-size: 20px;
-    color: #ffd5e0;
-}
-
-.signature {
-    margin-top: 55px;
-    text-align: center;
-    color: #f1b8ca;
-    line-height: 2;
-}
-
-.signature .love {
-    font-size: 35px;
-    margin-bottom: 12px;
-}
-
-button {
-    margin-top: 40px;
-    padding: 14px 35px;
-    border: 1px solid #f5b7ca;
-    border-radius: 30px;
-    background: transparent;
-    color: #ffe8ee;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #f5b7ca;
-    color: #42152b;
-}
-
-.hidden-message {
-    display: none;
-    margin-top: 30px;
-    text-align: center;
-    color: #ffd5e0;
-    font-size: 19px;
-    line-height: 2;
-}
-
-footer {
-    margin-top: 65px;
-    color: rgba(255,220,230,0.55);
-    font-size: 12px;
-    letter-spacing: 2px;
-}
-
 @media(max-width: 500px) {
-    .container { padding-top: 65px; }
-    .card { padding: 28px 23px; }
-    .card p { font-size: 15px; }
+    .container {
+        padding-top: 65px;
+    }
+
+    .card {
+        padding: 28px 23px;
+    }
+
+    .card p {
+        font-size: 15px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     PAGE 1: HEART ANIMATION
-========================= -->
+<!-- =================================
+     FIRST PAGE
+================================= -->
 
 <section id="intro">
 
@@ -263,9 +279,9 @@ footer {
 </section>
 
 
-<!-- =========================
-     PAGE 2: LOVE LETTER
-========================= -->
+<!-- =================================
+     SECOND PAGE
+================================= -->
 
 <section id="letter">
 
@@ -273,9 +289,14 @@ footer {
 
     <main class="container">
 
-        <div class="small-title">A LETTER FROM MY HEART</div>
+        <div class="small-title">
+            A LETTER FROM MY HEART
+        </div>
 
-        <h2>有些话，<br>我想认真地告诉你。</h2>
+        <h2>
+            有些话，<br>
+            我想认真地告诉你。
+        </h2>
 
         <div class="subtitle">
             写给我最爱的你 ❤️
@@ -407,43 +428,72 @@ footer {
 
 <script>
 
-/* =========================
-   HEART PARTICLE ENGINE
-   JavaScript port of Python code
-========================= */
+/* =================================
+   ORIGINAL PYTHON HEART PARAMETERS
+================================= */
+
+const CANVAS_WIDTH = 1500;
+const CANVAS_HEIGHT = 1000;
+
+const CANVAS_CENTER_X = CANVAS_WIDTH / 2;
+const CANVAS_CENTER_Y = CANVAS_HEIGHT / 2;
+
+const IMAGE_ENLARGE = 11;
+const HEART_COLOR = "#FF99CC";
+
+const GENERATE_FRAME = 20;
+
+
+/* =================================
+   CANVAS INITIALIZATION
+================================= */
 
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 
-const W = 1500;
-const H = 1000;
-const CX = W / 2;
-const CY = H / 2;
-const COLOR = "#FF99CC";
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
 
-canvas.width = W;
-canvas.height = H;
 
-function heartFunction(t, enlarge = 11) {
+/* =================================
+   HEART FUNCTION
+================================= */
+
+function heart_function(t, shrink_ratio = IMAGE_ENLARGE) {
+
     let x = 16 * Math.pow(Math.sin(t), 3);
 
-    let y = -(13 * Math.cos(t)
+    let y = -(
+        13 * Math.cos(t)
         - 5 * Math.cos(2*t)
         - 2 * Math.cos(3*t)
-        - Math.cos(4*t));
+        - Math.cos(4*t)
+    );
+
+    x *= shrink_ratio;
+    y *= shrink_ratio;
+
+    x += CANVAS_CENTER_X;
+    y += CANVAS_CENTER_Y;
 
     return {
-        x: x * enlarge + CX,
-        y: y * enlarge + CY
+        x: Math.floor(x),
+        y: Math.floor(y)
     };
 }
 
-function scatterInside(x, y, beta = 0.15) {
-    const rx = -beta * Math.log(Math.random());
-    const ry = -beta * Math.log(Math.random());
 
-    const dx = rx * (x - CX);
-    const dy = ry * (y - CY);
+/* =================================
+   SCATTER INSIDE
+================================= */
+
+function scatter_inside(x, y, beta = 0.15) {
+
+    const ratio_x = -beta * Math.log(Math.random());
+    const ratio_y = -beta * Math.log(Math.random());
+
+    const dx = ratio_x * (x - CANVAS_CENTER_X);
+    const dy = ratio_y * (y - CANVAS_CENTER_Y);
 
     return {
         x: x - dx,
@@ -451,171 +501,320 @@ function scatterInside(x, y, beta = 0.15) {
     };
 }
 
+
+/* =================================
+   SHRINK
+================================= */
+
 function shrink(x, y, ratio) {
-    const force = -1 / (
-        Math.pow(
-            (x-CX)**2 + (y-CY)**2,
-            0.6
-        )
+
+    const force = -1 / Math.pow(
+        (x - CANVAS_CENTER_X)**2 +
+        (y - CANVAS_CENTER_Y)**2,
+        0.6
     );
 
+    const dx = ratio * force * (x - CANVAS_CENTER_X);
+    const dy = ratio * force * (y - CANVAS_CENTER_Y);
+
     return {
-        x: x - ratio * force * (x-CX),
-        y: y - ratio * force * (y-CY)
+        x: x - dx,
+        y: y - dy
     };
 }
 
+
+/* =================================
+   CURVE
+================================= */
+
 function curve(p) {
-    return 2 * Math.sin(4*p) / Math.PI;
+    return 2 * (2 * Math.sin(4*p)) / (2*Math.PI);
 }
 
-function calcPosition(x, y, ratio) {
+
+/* =================================
+   CALCULATE POSITION
+================================= */
+
+function calc_position(x, y, ratio) {
+
     const force = 1 / Math.pow(
-        (x-CX)**2 + (y-CY)**2,
+        (x - CANVAS_CENTER_X)**2 +
+        (y - CANVAS_CENTER_Y)**2,
         0.520
     );
 
+    const dx = ratio * force * (x - CANVAS_CENTER_X)
+        + Math.floor(Math.random()*3)-1;
+
+    const dy = ratio * force * (y - CANVAS_CENTER_Y)
+        + Math.floor(Math.random()*3)-1;
+
     return {
-        x: x - ratio * force * (x-CX) + (Math.random()*2-1),
-        y: y - ratio * force * (y-CY) + (Math.random()*2-1)
+        x: x - dx,
+        y: y - dy
     };
 }
 
 
-/* Build original heart particles */
+/* =================================
+   HEART CLASS
+================================= */
 
-const outline = [];
-const edge = [];
-const center = [];
+class Heart {
 
-for (let i = 0; i < 2000; i++) {
-    const p = heartFunction(Math.random()*2*Math.PI);
-    outline.push(p);
-}
+    constructor(generate_frame = 20) {
 
-for (const p of outline) {
-    for (let i = 0; i < 3; i++) {
-        edge.push(scatterInside(p.x, p.y, 0.05));
+        this.points = [];
+        this.edge_diffusion_points = [];
+        this.center_diffusion_points = [];
+
+        this.all_points = {};
+
+        this.generate_frame = generate_frame;
+
+        this.build(2000);
+
+        this.random_halo = 1000;
+
+        for (let frame = 0; frame < generate_frame; frame++) {
+            this.calc(frame);
+        }
+    }
+
+
+    build(number) {
+
+        for (let i = 0; i < number; i++) {
+
+            const t = Math.random() * 2 * Math.PI;
+
+            const p = heart_function(t);
+
+            this.points.push(p);
+        }
+
+
+        // Edge diffusion
+
+        for (const p of this.points) {
+
+            for (let i = 0; i < 3; i++) {
+
+                const q = scatter_inside(
+                    p.x,
+                    p.y,
+                    0.05
+                );
+
+                this.edge_diffusion_points.push(q);
+            }
+        }
+
+
+        // Center diffusion
+
+        for (let i = 0; i < 4000; i++) {
+
+            const p = this.points[
+                Math.floor(Math.random() * this.points.length)
+            ];
+
+            const q = scatter_inside(
+                p.x,
+                p.y,
+                0.17
+            );
+
+            this.center_diffusion_points.push(q);
+        }
+    }
+
+
+    calc(frame) {
+
+        const ratio = 10 * curve(
+            frame / 10 * Math.PI
+        );
+
+        const halo_radius = Math.floor(
+            4 + 6 * (
+                1 + curve(frame / 10 * Math.PI)
+            )
+        );
+
+        const halo_number = Math.floor(
+            3000 + 4000 * Math.abs(
+                curve(frame / 10 * Math.PI)**2
+            )
+        );
+
+        const all_points = [];
+
+        const heart_halo_point = new Set();
+
+
+        // Halo
+
+        for (let i = 0; i < halo_number; i++) {
+
+            const t = Math.random() * 2 * Math.PI;
+
+            let p = heart_function(t, 11.6);
+
+            p = shrink(
+                p.x,
+                p.y,
+                halo_radius
+            );
+
+            const key = `${Math.round(p.x)},${Math.round(p.y)}`;
+
+            if (!heart_halo_point.has(key)) {
+
+                heart_halo_point.add(key);
+
+                const x = p.x + Math.floor(Math.random()*29)-14;
+                const y = p.y + Math.floor(Math.random()*29)-14;
+
+                const size = [1, 2, 2][
+                    Math.floor(Math.random()*3)
+                ];
+
+                all_points.push({x, y, size});
+            }
+        }
+
+
+        // Outline
+
+        for (const p of this.points) {
+
+            const q = calc_position(
+                p.x,
+                p.y,
+                ratio
+            );
+
+            const size = Math.floor(Math.random()*3)+1;
+
+            all_points.push({
+                x: q.x,
+                y: q.y,
+                size
+            });
+        }
+
+
+        // Edge diffusion
+
+        for (const p of this.edge_diffusion_points) {
+
+            const q = calc_position(
+                p.x,
+                p.y,
+                ratio
+            );
+
+            const size = Math.floor(Math.random()*2)+1;
+
+            all_points.push({
+                x: q.x,
+                y: q.y,
+                size
+            });
+        }
+
+
+        // Center diffusion
+
+        for (const p of this.center_diffusion_points) {
+
+            const q = calc_position(
+                p.x,
+                p.y,
+                ratio
+            );
+
+            const size = Math.floor(Math.random()*2)+1;
+
+            all_points.push({
+                x: q.x,
+                y: q.y,
+                size
+            });
+        }
+
+        this.all_points[frame] = all_points;
+    }
+
+
+    render(frame) {
+
+        ctx.clearRect(
+            0,
+            0,
+            CANVAS_WIDTH,
+            CANVAS_HEIGHT
+        );
+
+        ctx.fillStyle = HEART_COLOR;
+
+        ctx.shadowColor = HEART_COLOR;
+        ctx.shadowBlur = 5;
+
+        const points = this.all_points[
+            frame % this.generate_frame
+        ];
+
+        for (const p of points) {
+
+            ctx.fillRect(
+                p.x,
+                p.y,
+                p.size,
+                p.size
+            );
+        }
+
+        ctx.shadowBlur = 0;
     }
 }
 
-for (let i = 0; i < 4000; i++) {
-    const p = outline[Math.floor(Math.random()*outline.length)];
-    center.push(scatterInside(p.x, p.y, 0.17));
-}
 
+/* =================================
+   ANIMATION
+================================= */
 
-/* Render animation */
+const heart = new Heart(GENERATE_FRAME);
 
-let frame = 0;
+let render_frame = 0;
 let running = true;
 
-function drawHeart() {
+function draw() {
 
     if (!running) return;
 
-    ctx.clearRect(0, 0, W, H);
+    heart.render(render_frame);
 
-    const ratio = 10 * curve(frame / 10 * Math.PI);
+    render_frame++;
 
-    const haloRadius = 4 + 6 * (
-        1 + curve(frame / 10 * Math.PI)
-    );
+    // Original Python timing: 160ms
 
-    const haloNumber = Math.floor(
-        3000 + 4000 * Math.abs(
-            curve(frame / 10 * Math.PI)**2
-        )
-    );
-
-    const pulse = 0.92 + 0.08 * Math.sin(frame * 0.13);
-
-    ctx.save();
-    ctx.translate(CX, CY);
-    ctx.scale(pulse, pulse);
-    ctx.translate(-CX, -CY);
-
-    /* Glow effect */
-
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = COLOR;
-    ctx.fillStyle = COLOR;
-
-    /* Halo particles */
-
-    for (let i = 0; i < haloNumber; i++) {
-
-        const p = heartFunction(
-            Math.random()*2*Math.PI,
-            11.6
-        );
-
-        const s = shrink(p.x, p.y, haloRadius);
-
-        const x = s.x + Math.random()*28-14;
-        const y = s.y + Math.random()*28-14;
-
-        ctx.globalAlpha = 0.35 + Math.random()*0.55;
-
-        const size = Math.random() < 0.7 ? 2 : 3;
-
-        ctx.fillRect(x, y, size, size);
-    }
-
-    /* Heart outline */
-
-    ctx.shadowBlur = 15;
-
-    for (const p of outline) {
-
-        const q = calcPosition(p.x, p.y, ratio);
-
-        ctx.globalAlpha = 0.9;
-        const size = 1 + Math.random()*2;
-
-        ctx.fillRect(q.x, q.y, size, size);
-    }
-
-    /* Inner edge particles */
-
-    for (const p of edge) {
-
-        const q = calcPosition(p.x, p.y, ratio);
-
-        ctx.globalAlpha = 0.7 + Math.random()*0.3;
-
-        ctx.fillRect(q.x, q.y, 2, 2);
-    }
-
-    /* Center diffusion */
-
-    ctx.shadowBlur = 8;
-
-    for (const p of center) {
-
-        const q = calcPosition(p.x, p.y, ratio);
-
-        ctx.globalAlpha = 0.5 + Math.random()*0.5;
-
-        ctx.fillRect(q.x, q.y, 2, 2);
-    }
-
-    ctx.restore();
-
-    ctx.globalAlpha = 1;
-
-    frame++;
-    requestAnimationFrame(drawHeart);
+    setTimeout(draw, 160);
 }
 
-drawHeart();
+draw();
 
 
-/* =========================
-   CLICK TO OPEN LETTER
-========================= */
+/* =================================
+   OPEN LETTER
+================================= */
 
 function openLetter() {
+
+    if (!running) return;
 
     running = false;
 
@@ -627,17 +826,20 @@ function openLetter() {
     setTimeout(() => {
 
         intro.style.display = "none";
+
         letter.style.display = "block";
 
         window.scrollTo(0, 0);
 
         createFloatingHearts();
 
-    }, 1300);
+    }, 1500);
 }
 
 
-/* Floating hearts on letter page */
+/* =================================
+   FLOATING HEARTS
+================================= */
 
 function createFloatingHearts() {
 
@@ -651,16 +853,24 @@ function createFloatingHearts() {
         heart.innerHTML = "♥";
 
         heart.style.left = Math.random()*100 + "%";
-        heart.style.animationDuration = (7+Math.random()*9)+"s";
-        heart.style.animationDelay = Math.random()*10+"s";
-        heart.style.fontSize = (12+Math.random()*20)+"px";
+
+        heart.style.animationDuration =
+            (7 + Math.random()*9) + "s";
+
+        heart.style.animationDelay =
+            Math.random()*10 + "s";
+
+        heart.style.fontSize =
+            (12 + Math.random()*20) + "px";
 
         container.appendChild(heart);
     }
 }
 
 
-/* Final message */
+/* =================================
+   FINAL MESSAGE
+================================= */
 
 function showMessage() {
 
