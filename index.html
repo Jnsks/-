@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>写给我最爱的你 ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050307;
+    color: #fff0f3;
+    font-family: Georgia, "Songti SC", serif;
+    overflow-x: hidden;
+}
+
+/* =========================
+   第一页：粒子爱心
+========================= */
+
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 1.5s ease;
+}
+
+#heartCanvas {
+    width: min(95vw, 900px);
+    aspect-ratio: 3 / 2;
+    display: block;
+}
+
+.intro-text {
+    position: absolute;
+    bottom: 12%;
+    text-align: center;
+    cursor: pointer;
+    animation: breathe 2s infinite ease-in-out;
+}
+
+.intro-text h1 {
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: normal;
+    color: #ff99cc;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px #ff66aa;
+}
+
+.intro-text p {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #d99ab8;
+    letter-spacing: 3px;
+}
+
+@keyframes breathe {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+}
+
+#intro.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* =========================
+   第二页：告白信
+========================= */
+
+#letter {
+    display: none;
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at top, #67213d 0%, transparent 55%),
+        linear-gradient(135deg, #210b19, #54152f, #8e304f);
+    position: relative;
+    overflow: hidden;
+    animation: appear 2s ease forwards;
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -30px;
+    color: rgba(255, 190, 210, 0.5);
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 0.8; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 760px;
+    margin: auto;
+    padding: 90px 0 70px;
+    text-align: center;
+}
+
+.small-title {
+    letter-spacing: 5px;
+    color: #f3b9cb;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: clamp(32px, 7vw, 54px);
+    font-weight: normal;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.subtitle {
+    color: #e9b9c9;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 55px;
+}
+
+.card {
+    background: rgba(255,255,255,0.075);
+    border: 1px solid rgba(255,220,230,0.2);
+    border-radius: 22px;
+    padding: 40px 35px;
+    text-align: left;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 60px rgba(0,0,0,0.2);
+}
+
+.card p {
+    font-size: 16px;
+    line-height: 2.3;
+    margin-bottom: 23px;
+    color: #ffe8ee;
+}
+
+.card p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight {
+    color: #ffb4ca;
+}
+
+.divider {
+    width: 50px;
+    height: 1px;
+    background: #eaa2b8;
+    margin: 40px auto;
+}
+
+.promise {
+    text-align: center;
+    line-height: 2.2;
+    font-size: 20px;
+    color: #ffd5e0;
+}
+
+.signature {
+    margin-top: 55px;
+    text-align: center;
+    color: #f1b8ca;
+    line-height: 2;
+}
+
+.signature .love {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+button {
+    margin-top: 40px;
+    padding: 14px 35px;
+    border: 1px solid #f5b7ca;
+    border-radius: 30px;
+    background: transparent;
+    color: #ffe8ee;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #f5b7ca;
+    color: #42152b;
+}
+
+.hidden-message {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+    color: #ffd5e0;
+    font-size: 19px;
+    line-height: 2;
+}
+
+footer {
+    margin-top: 65px;
+    color: rgba(255,220,230,0.55);
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+@media(max-width: 500px) {
+    .container { padding-top: 65px; }
+    .card { padding: 28px 23px; }
+    .card p { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     PAGE 1: HEART ANIMATION
+========================= -->
+
+<section id="intro">
+
+    <canvas id="heartCanvas"></canvas>
+
+    <div class="intro-text" onclick="openLetter()">
+        <h1>点一下我 ❤️</h1>
+        <p>我有一些话，想说给你听</p>
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PAGE 2: LOVE LETTER
+========================= -->
+
+<section id="letter">
+
+    <div class="hearts" id="hearts"></div>
+
+    <main class="container">
+
+        <div class="small-title">A LETTER FROM MY HEART</div>
+
+        <h2>有些话，<br>我想认真地告诉你。</h2>
+
+        <div class="subtitle">
+            写给我最爱的你 ❤️
+        </div>
+
+        <section class="card">
+
+            <p>亲爱的：</p>
+
+            <p>
+                我想了很久，还是觉得有很多话想亲口告诉你。
+                也许平时的我并不擅长表达自己的感情，
+                有时候明明心里有很多话，却总是说不清楚，
+                甚至因为自己的表达方式，让你难过、失望。
+            </p>
+
+            <p>
+                首先，我真的想对你说一声
+                <span class="highlight">对不起。</span>
+            </p>
+
+            <p>
+                对不起我很多时候的词不达意，
+                对不起我没有及时理解你的感受，
+                也对不起那些因为我的言行而让你受到的伤害。
+                我不应该因为自己的情绪而对你生气，
+                更不应该让你承受本不应该承受的委屈。
+            </p>
+
+            <p>
+                我知道，一句对不起并不能抹去已经发生的事情，
+                也不能要求你立刻原谅我。
+                但我希望你知道，我有认真地反思自己，
+                我不想再让同样的问题一次又一次地伤害你。
+            </p>
+
+            <p>
+                其实，我真的很爱你。
+                你对我来说是非常重要的存在。
+                我很珍惜我们之间的一切，
+                也很难想象没有你参与的未来。
+                我希望你在我身边的时候，
+                感受到的更多是爱、安心和幸福，
+                而不是委屈和难过。
+            </p>
+
+            <p>
+                我希望自己能够做一个更好的男朋友。
+                不应该总是让你迁就我，
+                而应该多一点耐心，多一点理解，
+                多一点包容。
+                我想好好宠你、疼你，
+                认真对待你的情绪和每一个小小的感受。
+            </p>
+
+            <p>
+                我也知道，爱不应该只停留在嘴上。
+                我会努力改变自己，
+                学着更好地沟通，更认真地倾听，
+                在你需要我的时候给予你支持，
+                在有矛盾的时候也不再只顾着自己的情绪。
+            </p>
+
+            <p>
+                我不敢说自己以后一定不会犯错，
+                但我希望你能看到，
+                我是真的愿意为了我们的感情而不断成长，
+                也愿意用每一天的行动证明我的爱。
+            </p>
+
+            <p>
+                <span class="highlight">
+                    我真的很爱你，也真的很珍惜你。
+                </span>
+                谢谢你出现在我的生命里，
+                谢谢你陪伴我走过这些日子。
+            </p>
+
+            <p>
+                如果可以，我希望未来还有很多很多个日子，
+                我们可以一起度过。
+                我想继续陪着你，照顾你，
+                分享生活里的大事小事，
+                也希望能成为一个让你感到幸福的人。
+            </p>
+
+            <p>
+                最后，再认真地跟你说一次：
+                对不起，也谢谢你。
+                我爱你。
+            </p>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <div class="promise">
+            我希望以后的我，<br>
+            不只是更会说爱你，<br>
+            而是真的会更加努力地爱你。
+        </div>
+
+        <div class="signature">
+            <div class="love">♥</div>
+            永远珍惜你的我
+            <br>
+            <span style="font-size:13px;">
+                To the person I love most.
+            </span>
+        </div>
+
+        <button onclick="showMessage()">
+            还有一句话想告诉你 ❤️
+        </button>
+
+        <div class="hidden-message" id="message">
+            你不用成为一个完美的人，<br>
+            在我眼里，你就是我想认真珍惜的人。<br>
+            <span class="highlight">我爱你。❤️</span>
+        </div>
+
+        <footer>
+            MADE WITH LOVE · JUST FOR YOU
+        </footer>
+
+    </main>
+</section>
+
+
+<script>
+
+/* =========================
+   HEART PARTICLE ENGINE
+   JavaScript port of Python code
+========================= */
+
+const canvas = document.getElementById("heartCanvas");
+const ctx = canvas.getContext("2d");
+
+const W = 1500;
+const H = 1000;
+const CX = W / 2;
+const CY = H / 2;
+const COLOR = "#FF99CC";
+
+canvas.width = W;
+canvas.height = H;
+
+function heartFunction(t, enlarge = 11) {
+    let x = 16 * Math.pow(Math.sin(t), 3);
+
+    let y = -(13 * Math.cos(t)
+        - 5 * Math.cos(2*t)
+        - 2 * Math.cos(3*t)
+        - Math.cos(4*t));
+
+    return {
+        x: x * enlarge + CX,
+        y: y * enlarge + CY
+    };
+}
+
+function scatterInside(x, y, beta = 0.15) {
+    const rx = -beta * Math.log(Math.random());
+    const ry = -beta * Math.log(Math.random());
+
+    const dx = rx * (x - CX);
+    const dy = ry * (y - CY);
+
+    return {
+        x: x - dx,
+        y: y - dy
+    };
+}
+
+function shrink(x, y, ratio) {
+    const force = -1 / (
+        Math.pow(
+            (x-CX)**2 + (y-CY)**2,
+            0.6
+        )
+    );
+
+    return {
+        x: x - ratio * force * (x-CX),
+        y: y - ratio * force * (y-CY)
+    };
+}
+
+function curve(p) {
+    return 2 * Math.sin(4*p) / Math.PI;
+}
+
+function calcPosition(x, y, ratio) {
+    const force = 1 / Math.pow(
+        (x-CX)**2 + (y-CY)**2,
+        0.520
+    );
+
+    return {
+        x: x - ratio * force * (x-CX) + (Math.random()*2-1),
+        y: y - ratio * force * (y-CY) + (Math.random()*2-1)
+    };
+}
+
+
+/* Build original heart particles */
+
+const outline = [];
+const edge = [];
+const center = [];
+
+for (let i = 0; i < 2000; i++) {
+    const p = heartFunction(Math.random()*2*Math.PI);
+    outline.push(p);
+}
+
+for (const p of outline) {
+    for (let i = 0; i < 3; i++) {
+        edge.push(scatterInside(p.x, p.y, 0.05));
+    }
+}
+
+for (let i = 0; i < 4000; i++) {
+    const p = outline[Math.floor(Math.random()*outline.length)];
+    center.push(scatterInside(p.x, p.y, 0.17));
+}
+
+
+/* Render animation */
+
+let frame = 0;
+let running = true;
+
+function drawHeart() {
+
+    if (!running) return;
+
+    ctx.clearRect(0, 0, W, H);
+
+    const ratio = 10 * curve(frame / 10 * Math.PI);
+
+    const haloRadius = 4 + 6 * (
+        1 + curve(frame / 10 * Math.PI)
+    );
+
+    const haloNumber = Math.floor(
+        3000 + 4000 * Math.abs(
+            curve(frame / 10 * Math.PI)**2
+        )
+    );
+
+    const pulse = 0.92 + 0.08 * Math.sin(frame * 0.13);
+
+    ctx.save();
+    ctx.translate(CX, CY);
+    ctx.scale(pulse, pulse);
+    ctx.translate(-CX, -CY);
+
+    /* Glow effect */
+
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = COLOR;
+    ctx.fillStyle = COLOR;
+
+    /* Halo particles */
+
+    for (let i = 0; i < haloNumber; i++) {
+
+        const p = heartFunction(
+            Math.random()*2*Math.PI,
+            11.6
+        );
+
+        const s = shrink(p.x, p.y, haloRadius);
+
+        const x = s.x + Math.random()*28-14;
+        const y = s.y + Math.random()*28-14;
+
+        ctx.globalAlpha = 0.35 + Math.random()*0.55;
+
+        const size = Math.random() < 0.7 ? 2 : 3;
+
+        ctx.fillRect(x, y, size, size);
+    }
+
+    /* Heart outline */
+
+    ctx.shadowBlur = 15;
+
+    for (const p of outline) {
+
+        const q = calcPosition(p.x, p.y, ratio);
+
+        ctx.globalAlpha = 0.9;
+        const size = 1 + Math.random()*2;
+
+        ctx.fillRect(q.x, q.y, size, size);
+    }
+
+    /* Inner edge particles */
+
+    for (const p of edge) {
+
+        const q = calcPosition(p.x, p.y, ratio);
+
+        ctx.globalAlpha = 0.7 + Math.random()*0.3;
+
+        ctx.fillRect(q.x, q.y, 2, 2);
+    }
+
+    /* Center diffusion */
+
+    ctx.shadowBlur = 8;
+
+    for (const p of center) {
+
+        const q = calcPosition(p.x, p.y, ratio);
+
+        ctx.globalAlpha = 0.5 + Math.random()*0.5;
+
+        ctx.fillRect(q.x, q.y, 2, 2);
+    }
+
+    ctx.restore();
+
+    ctx.globalAlpha = 1;
+
+    frame++;
+    requestAnimationFrame(drawHeart);
+}
+
+drawHeart();
+
+
+/* =========================
+   CLICK TO OPEN LETTER
+========================= */
+
+function openLetter() {
+
+    running = false;
+
+    const intro = document.getElementById("intro");
+    const letter = document.getElementById("letter");
+
+    intro.classList.add("hide");
+
+    setTimeout(() => {
+
+        intro.style.display = "none";
+        letter.style.display = "block";
+
+        window.scrollTo(0, 0);
+
+        createFloatingHearts();
+
+    }, 1300);
+}
+
+
+/* Floating hearts on letter page */
+
+function createFloatingHearts() {
+
+    const container = document.getElementById("hearts");
+
+    for (let i = 0; i < 22; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+        heart.innerHTML = "♥";
+
+        heart.style.left = Math.random()*100 + "%";
+        heart.style.animationDuration = (7+Math.random()*9)+"s";
+        heart.style.animationDelay = Math.random()*10+"s";
+        heart.style.fontSize = (12+Math.random()*20)+"px";
+
+        container.appendChild(heart);
+    }
+}
+
+
+/* Final message */
+
+function showMessage() {
+
+    const message = document.getElementById("message");
+
+    message.style.display = "block";
+
+    message.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+</script>
+
+</body>
+</html>
